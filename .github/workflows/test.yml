@@ -35,7 +35,7 @@ jobs:
       - name: Upload to release
         uses:  JasonEtco/upload-to-release@master
         with:
-          args: ${{ github.workspace }}/apk/*.apk
+          args: ${{ github.workspace }}/apk/app-release-unsigned.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           

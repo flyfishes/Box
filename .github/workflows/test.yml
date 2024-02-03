@@ -31,13 +31,11 @@ jobs:
         with:
           name: com.github.tvbox.osc
           path: ${{ github.workspace }}/apk/*
-      - name: Create GitHub release
-        uses: actions/upload-release-asset@latest
+      
+      - name: Upload to release
+        uses: box/upload-to-release@main
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: $ver
-          title: $ver
-          prerelease: false
-          files: |
-            ${{ github.workspace }}/apk/*
-            
+          args: ${{ github.workspace }}/apk/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          

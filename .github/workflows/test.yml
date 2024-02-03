@@ -24,6 +24,7 @@ jobs:
           for file in `find ~ -name "*.apk" -print`; do
             mv "$file" ${{ github.workspace }}/apk/
           done
+            ls -l ${{ github.workspace }}/apk/
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
         with:

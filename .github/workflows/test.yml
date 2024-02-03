@@ -31,8 +31,7 @@ jobs:
         with:
           name: com.github.tvbox.osc
           path: ${{ github.workspace }}/apk/*
-  
-   - name: Create GitHub release
+      - name: Create GitHub release
         uses: actions/upload-release-asset@latest
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"

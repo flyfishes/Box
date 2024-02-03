@@ -33,7 +33,7 @@ jobs:
           path: ${{ github.workspace }}/apk/*
       
       - name: Upload to release
-        uses: box/upload-to-release@main
+        uses:  JasonEtco/upload-to-release@master
         with:
           args: ${{ github.workspace }}/apk/*.apk
         env:

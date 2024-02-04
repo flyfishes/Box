@@ -26,7 +26,7 @@ jobs:
           done
             ls -l ${{ github.workspace }}/apk/
             nn=`ls --time-style='+%Y%m%d' -l *.apk 2>/dev/null |wc -l`;if [ $nn -gt 0 ]; then  ver=`ls --time-style='+%Y%m%d' -l *.apk |head -n 1|awk '{print $6}'`;  else ver='release'; fi
-            tar -zxvf ${{ github.workspace }}/apk/tvbox-takagen99-$ver.gz ${{ github.workspace }}/apk/
+            tar -zcvf ${{ github.workspace }}/apk/tvbox-takagen99-$ver.gz ${{ github.workspace }}/apk/
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
         with:

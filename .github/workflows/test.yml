@@ -22,9 +22,8 @@ jobs:
           chmod +x gradlew
           ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
       - name: Prepare App
+        id: prepare_app
         run: |
-          echo "app_ver=app-release-unsigned.apk" >> "$GITHUB_ENV"
-          echo $app_ver
           mkdir -p ${{ github.workspace }}/apk/
           for file in `find ~ -name "*.apk" -print`; do
             mv "$file" ${{ github.workspace }}/apk/
@@ -37,8 +36,8 @@ jobs:
             fi
             app_name=`ls -l ${{ github.workspace }}/apk/*.apk |head -n 1|awk '{print $9}'`;  
     
-            echo "app_ver=app-release-unsigned.apk" >> "$GITHUB_ENV"
-            echo $app_ver
+            echo "app_ver=app-release-unsigned.apk" >> "$GITHUB_OUTPUT"
+            echo "appver is " ${{steps.prepare_app.outputs.app_ver}}
             
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
@@ -47,9 +46,10 @@ jobs:
           path: ${{ github.workspace }}/apk/*
       
       - name: Upload to release
+        env: APP_VER:${{steps.prepare_app.outputs.app_ver}}
         uses:  JasonEtco/upload-to-release@master
         with:
-          args: ${{ github.workspace }}/apk/$app_ver
+          args: ${{ github.workspace }}/apk/$APP_VER
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           

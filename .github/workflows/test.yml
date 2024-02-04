@@ -30,8 +30,9 @@ jobs:
             else 
               ver='release'; 
             fi
-            tar -zcvf ${{ github.workspace }}/apk/tvbox-takagen99-$ver.gz ${{ github.workspace }}/apk/
-            ls -l ${{ github.workspace }}/apk/
+            cd ${{ github.workspace }}/apk/
+            tar -zcvf tvbox-takagen99-$ver.gz *
+            ls -l 
             
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3

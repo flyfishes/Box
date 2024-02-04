@@ -38,7 +38,7 @@ jobs:
             app_name=`ls *.apk | head -n 1`;  
     
             echo "app_ver=$app_name" >> "$GITHUB_OUTPUT"
-            echo "appver is " $app_ver
+            echo "app is: " ${{steps.prepare_app.outputs.app_ver}}
             
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3

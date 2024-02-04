@@ -44,7 +44,11 @@ jobs:
         with:
           name: com.github.tvbox.osc
           path: ${{ github.workspace }}/apk/*
-      
+
+      - name: show dir
+        run: |
+           ls -l ${{ github.workspace }}/apk/
+           
       - name: Upload to release
         uses:  JasonEtco/upload-to-release@master
         with:
@@ -52,4 +56,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           APP_VER: ${{steps.prepare_app.outputs.app_ver}}
+
           

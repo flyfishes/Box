@@ -23,6 +23,8 @@ jobs:
           ./gradlew assemblerelease --build-cache --parallel --daemon --warning-mode all
       - name: Prepare App
         run: |
+          echo "app_ver=app-release-unsigned.apk" >> "$GITHUB_ENV"
+          echo $app_ver
           mkdir -p ${{ github.workspace }}/apk/
           for file in `find ~ -name "*.apk" -print`; do
             mv "$file" ${{ github.workspace }}/apk/
@@ -36,6 +38,7 @@ jobs:
             app_name=`ls -l ${{ github.workspace }}/apk/*.apk |head -n 1|awk '{print $9}'`;  
     
             echo "app_ver=app-release-unsigned.apk" >> "$GITHUB_ENV"
+            echo $app_ver
             
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3

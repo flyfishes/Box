@@ -35,7 +35,7 @@ jobs:
             fi
             app_name=`ls -l ${{ github.workspace }}/apk/*.apk |head -n 1|awk '{print $9}'`;  
     
-            ${{env.APP_VER}}=app-release-unsigned.apk
+            echo "app_ver=app-release-unsigned.apk" >> "$GITHUB_ENV"
             
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
@@ -46,7 +46,7 @@ jobs:
       - name: Upload to release
         uses:  JasonEtco/upload-to-release@master
         with:
-          args: ${{ github.workspace }}/apk/${{env.APP_VER}}
+          args: ${{ github.workspace }}/apk/$app_ver
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           

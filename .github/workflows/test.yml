@@ -34,7 +34,8 @@ jobs:
             else 
               ver='release'; 
             fi
-            app_name=`ls ${{ github.workspace }}/apk/*.apk |head -n 1`;  
+            cd ${{ github.workspace }}/apk/
+            app_name=`ls *.apk | head -n 1`;  
     
             echo "app_ver=$app_name" >> "$GITHUB_OUTPUT"
             echo "appver is " $app_ver

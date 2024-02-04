@@ -26,6 +26,7 @@ jobs:
           done
             ls -l ${{ github.workspace }}/apk/
             nn=`ls --time-style='+%Y%m%d' -l *.apk 2>/dev/null |wc -l`;if [ $nn -gt 0 ]; then  ver=`ls --time-style='+%Y%m%d' -l *.apk |head -n 1|awk '{print $6}'`;  else ver='release'; fi
+            tar -zxvf ${{ github.workspace }}/apk/tvbox-takagen99-$ver.gz ${{ github.workspace }}/apk/
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
         with:
@@ -35,7 +36,7 @@ jobs:
       - name: Upload to release
         uses:  JasonEtco/upload-to-release@master
         with:
-          args: ${{ github.workspace }}/apk/app-release-unsigned.apk
+          args: ${{ github.workspace }}/apk/tvbox-takagen99-$ver.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           

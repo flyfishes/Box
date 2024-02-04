@@ -59,12 +59,5 @@ jobs:
           files: |
              apk/${{steps.prepare_app.outputs.app_ver}}
              
-      - name: Upload to release
-        uses:  JasonEtco/upload-to-release@master
-        with:
-          args: apk/${{env.APP_VER}}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          APP_VER: ${{steps.prepare_app.outputs.app_ver}}
 
           

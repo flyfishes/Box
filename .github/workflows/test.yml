@@ -33,10 +33,9 @@ jobs:
             else 
               ver='release'; 
             fi
-            ${{env.APP_VER}}=$ver
-            cd ${{ github.workspace }}
-            tar -zcvf tvbox-takagen99-$ver.gz apk/*
-            ls -l 
+            app_name=`ls -l ${{ github.workspace }}/apk/*.apk |head -n 1|awk '{print $9}'`;  
+    
+            ${{env.APP_VER}}=app-release-unsigned.apk
             
       - name: Upload App To Artifact
         uses: actions/upload-artifact@v3
@@ -47,7 +46,7 @@ jobs:
       - name: Upload to release
         uses:  JasonEtco/upload-to-release@master
         with:
-          args: ${{ github.workspace }}/apk/tvbox-takagen99-${{env.APP_VER}}.gz
+          args: ${{ github.workspace }}/apk/${{env.APP_VER}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
